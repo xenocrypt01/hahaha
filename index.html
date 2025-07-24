@@ -1,380 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr Smile™ - Technology & Ethical Hacking</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Video Background */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            object-fit: cover;
+            opacity: 0.3;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #00ff88;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #00ff88;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .profile-container {
+            margin-bottom: 2rem;
+        }
+
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid #00ff88;
+            background: #333;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #00ff88;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-pic:hover {
+            transform: scale(1.1);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #00ff88, #0088ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px #00ff88; }
+            to { text-shadow: 0 0 30px #0088ff; }
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        /* Sections */
+        .section {
+            padding: 5rem 0;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #00ff88;
+        }
+
+        /* Technology Section */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .tech-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
+        }
+
+        .tech-card h3 {
+            color: #00ff88;
+            margin-bottom: 1rem;
+        }
+
+        /* Followers Section */
+        .followers-section {
+            background: rgba(0, 136, 255, 0.1);
+        }
+
+        .followers-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            min-width: 200px;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #0088ff;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Ethical Hacking Section */
+        .hacking-section {
+            background: rgba(255, 0, 136, 0.1);
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(255, 0, 136, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: scale(1.05);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Contact Buttons */
+        .contact-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .contact-btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            background: linear-gradient(45deg, #00ff88, #0088ff);
+            color: #000;
+            font-weight: bold;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.9);
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid #333;
+        }
+
+        .footer-content {
+            color: #00ff88;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .followers-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .contact-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Scroll Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
     <!-- Video Background -->
-    <div class="video-background">
-        <video autoplay muted loop>
-            <!-- Add your video source here -->
-            <source src="your-video-background.mp4" type="video/mp4">
-            <!-- Fallback for browsers that don't support video -->
-        </video>
-    </div>
-    <div class="video-overlay"></div>
+    <video class="video-background" autoplay muted loop>
+        <source src="your-tech-video.mp4" type="video/mp4">
+        <!-- Fallback for browsers that don't support video -->
+        Your browser does not support the video tag.
+    </video>
 
     <!-- Navigation -->
-    <nav class="navbar" id="navbar">
+    <nav>
         <div class="nav-container">
-            <div class="logo">Mr Smile ™</div>
-            <ul class="nav-menu" id="nav-menu">
+            <div class="logo">Mr Smile™</div>
+            <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
+                <li><a href="#technology">Technology</a></li>
+                <li><a href="#followers">Community</a></li>
                 <li><a href="#services">Services</a></li>
-                <li><a href="#projects">Projects</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <div class="mobile-menu" id="mobile-menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <div class="profile-image">
-                <!-- Replace with your profile image -->
-                <img src="your-profile-image.jpg" alt="Mr Smile" id="profile-img" style="display: none;">
-                <div class="profile-placeholder" id="profile-placeholder">MS</div>
+    <section id="home" class="hero">
+        <div class="profile-container">
+            <div class="profile-pic" onclick="document.getElementById('profile-upload').click()">
+                📷
             </div>
-            <h1>Welcome to My Tech World</h1>
-            <p>Professional Ethical Hacker & Technology Expert</p>
-            <p>WhatsApp & Telegram Bot Development | Cybersecurity | Tech Innovation</p>
-            <div class="cta-buttons">
-                <a href="#services" class="cta-btn cta-primary">Explore Services</a>
-                <a href="#contact" class="cta-btn cta-secondary">Get In Touch</a>
-            </div>
+            <input type="file" id="profile-upload" style="display: none;" accept="image/*" onchange="updateProfilePic(event)">
+        </div>
+        <h1>Professional Technology Expert</h1>
+        <p>Specializing in Ethical Hacking, Bot Development, and Cutting-Edge Technology Solutions</p>
+        <div class="contact-buttons">
+            <a href="#contact" class="contact-btn">Get Started</a>
+            <a href="#technology" class="contact-btn">Explore Tech</a>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section class="section" id="about">
+    <!-- Technology Section -->
+    <section id="technology" class="section">
         <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 30px;">
-                        Welcome to my digital realm! I'm a passionate technology professional specializing in ethical hacking, 
-                        cybersecurity, and innovative bot development. With years of experience in the tech industry, 
-                        I help businesses and individuals secure their digital assets while creating cutting-edge solutions.
-                    </p>
-                    <p style="font-size: 1.1rem; line-height: 1.7; opacity: 0.9;">
-                        My expertise spans across penetration testing, vulnerability assessments, WhatsApp and Telegram bot development, 
-                        and comprehensive cybersecurity consulting. I believe in sharing knowledge and empowering others 
-                        to understand and protect themselves in the digital world.
-                    </p>
+            <h2 class="section-title fade-in">TECHNOLOGY</h2>
+            <div class="tech-grid">
+                <div class="tech-card fade-in">
+                    <h3>🚀 Emerging Technologies</h3>
+                    <p>Stay ahead with the latest in AI, Machine Learning, Blockchain, and IoT. Exploring cutting-edge solutions that shape the future.</p>
+                </div>
+                <div class="tech-card fade-in">
+                    <h3>💻 Software Development</h3>
+                    <p>Full-stack development, mobile applications, and enterprise solutions using modern frameworks and technologies.</p>
+                </div>
+                <div class="tech-card fade-in">
+                    <h3>🔐 Cybersecurity</h3>
+                    <p>Advanced security protocols, vulnerability assessments, and ethical hacking methodologies to protect digital assets.</p>
+                </div>
+                <div class="tech-card fade-in">
+                    <h3>☁️ Cloud Computing</h3>
+                    <p>Scalable cloud solutions, DevOps practices, and infrastructure management for modern applications.</p>
+                </div>
+                <div class="tech-card fade-in">
+                    <h3>📊 Data Analytics</h3>
+                    <p>Big data processing, business intelligence, and predictive analytics to drive informed decision-making.</p>
+                </div>
+                <div class="tech-card fade-in">
+                    <h3>🌐 Web Technologies</h3>
+                    <p>Modern web development, progressive web apps, and responsive design for optimal user experiences.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section class="section" id="services">
+    <!-- Followers Section -->
+    <section id="followers" class="section followers-section">
         <div class="container">
-            <h2 class="section-title">My Services</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
+            <h2 class="section-title fade-in">MY FOLLOWERS AND FANS</h2>
+            <p class="fade-in" style="text-align: center; font-size: 1.1rem; margin-bottom: 2rem;">
+                Building a community of tech enthusiasts and cybersecurity professionals worldwide
+            </p>
+            <div class="followers-stats">
+                <div class="stat-card fade-in">
+                    <div class="stat-number">50K+</div>
+                    <div class="stat-label">Tech Followers</div>
+                </div>
+                <div class="stat-card fade-in">
+                    <div class="stat-number">25K+</div>
+                    <div class="stat-label">Telegram Community</div>
+                </div>
+                <div class="stat-card fade-in">
+                    <div class="stat-number">30K+</div>
+                    <div class="stat-label">WhatsApp Subscribers</div>
+                </div>
+                <div class="stat-card fade-in">
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label">Countries Reached</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ethical Hacking & Bot Services -->
+    <section id="services" class="section hacking-section">
+        <div class="container">
+            <h2 class="section-title fade-in">ETHICAL HACKING & TECHNOLOGY SERVICES</h2>
+            <div class="service-grid">
+                <div class="service-card fade-in">
+                    <div class="service-icon">🛡️</div>
                     <h3>Ethical Hacking</h3>
-                    <p>Professional penetration testing and vulnerability assessments to secure your systems and networks.</p>
+                    <p>Professional penetration testing, vulnerability assessments, and security audits to protect your digital infrastructure.</p>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <h3>WhatsApp Bots</h3>
-                    <p>Custom WhatsApp automation bots for business communication, customer service, and marketing.</p>
+                <div class="service-card fade-in">
+                    <div class="service-icon">💬</div>
+                    <h3>WhatsApp Bot Development</h3>
+                    <p>Custom WhatsApp automation bots for business communication, customer support, and workflow optimization.</p>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fab fa-telegram"></i>
-                    </div>
-                    <h3>Telegram Bots</h3>
-                    <p>Advanced Telegram bot development for automation, data management, and interactive services.</p>
+                <div class="service-card fade-in">
+                    <div class="service-icon">🤖</div>
+                    <h3>Telegram Bot Creation</h3>
+                    <p>Advanced Telegram bots with AI integration, payment processing, and interactive features for your community.</p>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-lock"></i>
-                    </div>
-                    <h3>Cybersecurity Consulting</h3>
-                    <p>Comprehensive security audits, policy development, and incident response planning.</p>
+                <div class="service-card fade-in">
+                    <div class="service-icon">🔍</div>
+                    <h3>Security Consulting</h3>
+                    <p>Comprehensive security strategy development, risk assessment, and implementation of best practices.</p>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <h3>Custom Development</h3>
-                    <p>Tailored software solutions, web applications, and automation tools for your specific needs.</p>
+                <div class="service-card fade-in">
+                    <div class="service-icon">⚡</div>
+                    <h3>Automation Solutions</h3>
+                    <p>Custom automation tools and scripts to streamline business processes and increase efficiency.</p>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <h3>Tech Training</h3>
-                    <p>Educational workshops and training sessions on cybersecurity, ethical hacking, and bot development.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section class="section" id="projects">
-        <div class="container">
-            <h2 class="section-title">Featured Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">
-                        <i class="fab fa-whatsapp"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>Business WhatsApp Bot</h3>
-                        <p>Automated customer service bot with AI integration, handling 1000+ daily inquiries with 95% accuracy.</p>
-                        <button class="project-btn">Learn More</button>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-bug"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>Security Assessment Tool</h3>
-                        <p>Custom penetration testing framework for automated vulnerability scanning and reporting.</p>
-                        <button class="project-btn">Learn More</button>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-image">
-                        <i class="fab fa-telegram"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>Telegram Analytics Bot</h3>
-                        <p>Advanced bot for social media analytics, engagement tracking, and automated reporting.</p>
-                        <button class="project-btn">Learn More</button>
-                    </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">📱</div>
+                    <h3>Tech Innovation</h3>
+                    <p>Cutting-edge technology solutions, proof of concepts, and digital transformation consulting.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section class="section" id="contact">
+    <section id="contact" class="section">
         <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
-            <form class="contact-form" id="contact-form">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="subject">Subject</label>
-                    <input type="text" id="subject" name="subject" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" rows="5" required></textarea>
-                </div>
-                <button type="submit" class="submit-btn">Send Message</button>
-            </form>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="social-links">
-                <a href="#" class="social-link" title="WhatsApp">
-                    <i class="fab fa-whatsapp"></i>
-                </a>
-                <a href="#" class="social-link" title="Telegram">
-                    <i class="fab fa-telegram"></i>
-                </a>
-                <a href="#" class="social-link" title="GitHub">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a href="#" class="social-link" title="LinkedIn">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-                <a href="#" class="social-link" title="Twitter">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a href="#" class="social-link" title="Instagram">
-                    <i class="fab fa-instagram"></i>
-                </a>
-            </div>
-            <div class="footer-text">
-                <p>Empowering technology enthusiasts with ethical hacking knowledge and innovative bot solutions.</p>
-                <p>Follow me for the latest in cybersecurity, tech tutorials, and automation tips!</p>
-            </div>
-            <div class="footer-signature">
-                Mr Smile ™
-            </div>
-        </div>
-    </footer>
-
-    <!-- JavaScript -->
-    <script>
-        // Navbar scroll effect
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // Mobile menu toggle
-        const mobileMenu = document.getElementById('mobile-menu');
-        const navMenu = document.getElementById('nav-menu');
-
-        mobileMenu.addEventListener('click', function() {
-            navMenu.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
-        });
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Profile image functionality
-        function updateProfileImage(imageUrl) {
-            const profileImg = document.getElementById('profile-img');
-            const profilePlaceholder = document.getElementById('profile-placeholder');
-            
-            if (imageUrl) {
-                profileImg.src = imageUrl;
-                profileImg.style.display = 'block';
-                profilePlaceholder.style.display = 'none';
-            } else {
-                profileImg.style.display = 'none';
-                profilePlaceholder.style.display = 'flex';
-            }
-        }
-
-        // Contact form handling
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(this);
-            const name = formData.get('name');
-            const email = formData.get('email');
-            const subject = formData.get('subject');
-            const message = formData.get('message');
-            
-            // Show success message (you can integrate with your email service)
-            alert('Thank you for your message! I will get back to you soon.');
-            
-            // Reset form
-            this.reset();
-        });
-
-        // Animate elements on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe all service cards and project cards
-        document.querySelectorAll('.service-card, .project-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(30px)';
-            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(card);
-        });
-
-        // Typing effect for hero text
-        function typeWriter(element, text, speed = 100) {
-            let i = 0;
-            element.innerHTML = '';
-            
-            function type() {
-                if (i < text.length) {
-                    element.innerHTML += text.charAt(i);
-                    i++;
-                    setTimeout(type, speed);
-                }
-            }
-            type();
-        }
-
-        // Initialize typing effect when page loads
-        window.addEventListener('load', function() {
-            const heroTitle = document.querySelector('.hero h1');
-            if (heroTitle) {
-                const originalText = heroTitle.textContent;
-                typeWriter(heroTitle, originalText, 150);
-            }
-        });
-
-        // Add particle effect to background
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.style.position = 'fixed';
-            particle.style.width = '4px';
-            particle.style.height = '4px';
-            particle.style.background = '#00FF7F';
-            particle.style.borderRadius = '50%';
-            particle.style.pointerEvents = 'none';
-            particle.style.zIndex = '-1';
-            particle.style.opacity = '0.7';
-            particle.style.left = Math.random() * window.innerWidth + 'px';
-            particle.style.top = window.innerHeight + 'px';
-            
-            document.body.appendChild(particle);
-            
-            const animation = particle.animate([
-                { transform: 'translateY(0px)', opacity: 0.7 },
-                { transform: `translateY(-${window.innerHeight + 100}px)`, opacity: 0 }
-            ], {
-                duration: Math.random() * 3000 + 2000,
-                easing: 'linear'
-            });
-            
-            animation.onfinish = () => {
-                particle.remove();
-            };
-        }
-
-        // Create particles periodically
-        setInterval(createParticle, 500);
-
-        // Add glitch effect to title on hover
-        const heroTitle = document.querySelector('.hero h1');
-        if (heroTitle) {
-            heroTitle.addEventListener('mouseenter', function() {
-                this.style.textShadow = '2px 0 #00FF7F, -2px 0 #8A2BE2, 0 2px #FF6B6B';
-                setTimeout(() => {
-                    this.style.textShadow = '0 0 30px rgba(0, 255, 127, 0.5)';
-                }, 200);
-            });
-        }
-    </script>
-
-    <style>
-        
+            <h2 class="section-title fade-in">Get In Touch</h2>
+            <div class="contact-buttons fade-in">
+                <a href="https://wa.me/your-number" class="contact-btn">WhatsApp</a>
+                <a href="https://t.me
